@@ -8,11 +8,13 @@
 import SwiftUI
 import Foundation
 struct ContentView: View {
+    @Binding var document: PlaticaBotDocument
     @State var settingsShown = false
     @Environment(\.openURL) var openURL
     @ObservedObject var key = openAIKey
     
     var body: some View {
+
         NavigationStack {
             if key.key == "" {
 #if os(iOS)
@@ -29,14 +31,14 @@ struct ContentView: View {
                 }
 #endif
             } else {
-                ChatView ()
+                ChatView (store: $document.store)
             }
         }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentView()
+//    }
+//}

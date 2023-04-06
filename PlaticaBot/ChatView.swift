@@ -14,7 +14,7 @@ import AVFoundation
 import AVFAudio
 
 /// Records what the user asked, the plain result, and the attributed version of it
-struct Interaction: Identifiable, Equatable, Hashable {
+struct Interaction: Identifiable, Equatable, Hashable, Codable {
     var id = UUID()
     var query: String
     var plain: String
@@ -86,9 +86,9 @@ struct InteractionView: View {
                                 synthesizer.stopSpeaking(at: .word)
                             }
                             let utterance = AVSpeechUtterance(string: interaction.plain)
-                            utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+                            //utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
                             // Alternative:
-                            //                             utterance.voice = AVSpeechSynthesisVoice(identifier: "com.apple.eloquence.en-US.Rocko")
+                            utterance.voice = AVSpeechSynthesisVoice(identifier: "en-US")
 
                             //utterance.rate = 0.5
 
@@ -126,7 +126,11 @@ struct ChatView: View {
     @State var newModel = false
     @State var prompt: String = ""
     @State var started = Date ()
-    @ObservedObject var store = InteractionStorage ()
+    #if os(watchOS)
+    var store: InteractionStorage
+    #else
+    @Binding var store: InteractionStorage
+    #endif
     @FocusState private var isPromptFocused: Bool
     @State var prime = false
     @State var appended = 0
@@ -161,13 +165,14 @@ struct ChatView: View {
         }
     }
     
-    init (prime: Bool = false) {
+    init (prime: Bool = false, store: Binding<InteractionStorage> ) {
         self._prime = State (initialValue: prime)
+        self._store = store
         _synthesizer = State (initialValue: AVSpeechSynthesizer())
         _synthesizerDelegate = State (initialValue: nil)
         let d = MyDelegate (speaking: .constant(nil))
         _synthesizerDelegate = State (initialValue: d)
-        synthesizer.delegate = synthesizerDelegate        
+        synthesizer.delegate = synthesizerDelegate
     }
     
     @MainActor
@@ -327,48 +332,48 @@ struct ChatView: View {
         #if os(macOS)
         .padding ()
         #endif
-        #if !os(watchOS)
-        .navigationTitle("PlaticaBot")
-        #endif
-        .toolbar {
-            #if os(watchOS)
-            ToolbarItem(placement: .destructiveAction) {
-                Button(action: newChat) {
-                    Text ("New")
-                }
-            }
-            ToolbarItem(placement: .primaryAction) {
-                shareView
-            }
-            #elseif os(macOS)
-            ToolbarItem(placement: .destructiveAction){
-                Button(action: newChat) {
-                    Text ("New Chat")
-                }
-            }
-            #elseif os(iOS)
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: newChat) {
-                    Text ("New Chat")
-                }
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                ControlGroup {
-                    shareView
-                    Menu (content: {
-                        Button (action: { newModel.toggle() }) {
-                            Text ("Toggle Engine - " + (newModel ? "GPT4" : "GPT3"))
-                        }
-                        Button (action: { showSettings = true }) {
-                            Text ("Settings")
-                        }
-                    }, label: {
-                        Label ("Settings", systemImage: "gear")
-                    })
-                }
-            }
-            #endif
-        }
+//        #if !os(watchOS)
+//        .navigationTitle("PlaticaBot")
+//        #endif
+//        .toolbar {
+//            #if os(watchOS)
+//            ToolbarItem(placement: .destructiveAction) {
+//                Button(action: newChat) {
+//                    Text ("New")
+//                }
+//            }
+//            ToolbarItem(placement: .primaryAction) {
+//                shareView
+//            }
+//            #elseif os(macOS)
+//            ToolbarItem(placement: .destructiveAction){
+//                Button(action: newChat) {
+//                    Text ("New Chat")
+//                }
+//            }
+//            #elseif os(iOS)
+//            ToolbarItem(placement: .navigationBarLeading) {
+//                Button(action: newChat) {
+//                    Text ("New Chat")
+//                }
+//            }
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                ControlGroup {
+//                    shareView
+//                    Menu (content: {
+//                        Button (action: { newModel.toggle() }) {
+//                            Text ("Toggle Engine - " + (newModel ? "GPT4" : "GPT3"))
+//                        }
+//                        Button (action: { showSettings = true }) {
+//                            Text ("Settings")
+//                        }
+//                    }, label: {
+//                        Label ("Settings", systemImage: "gear")
+//                    })
+//                }
+//            }
+//            #endif
+//        }
         #if os(iOS)
         .sheet (isPresented: $showSettings) {
             iOSGeneralSettings(settingsShown: $showSettings, dismiss: true)
@@ -386,6 +391,6 @@ struct ChatView: View {
 
 struct ChatView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatView(prime: true)
+        ChatView(prime: true, store: .constant(InteractionStorage()))
     }
 }

@@ -6,38 +6,20 @@
 //
 
 import SwiftUI
+import Foundation
+
 
 @main
 struct PlaticaBotApp: App {
-    #if os(macOS)
-    @Environment(\.openWindow) private var openWindow
-   
-    func quit () {
-        NSApplication.shared.terminate(nil)
-    }
-    #endif
-    
     var body: some Scene {
-        WindowGroup {
-            ContentView()
+        DocumentGroup(newDocument: PlaticaBotDocument() ) { file in
+            ContentView( document: file.$document )
         }
+
         #if os(macOS)
-        Window("Chat", id: "chat") {
-            ChatView ()
-        }
         Settings {
             SettingsView(settingsShown: .constant(true), dismiss: false)
         }
-
-        MenuBarExtra("", systemImage: "brain") {
-            Button (action: { openWindow(id: "chat") }) {
-                Text ("New Window")
-            }
-            Button (action: { quit ()}) {
-                Text ("Quit PlaticaBot")
-            }
-        }
-        .menuBarExtraStyle(.menu)
         #endif
     }
 }
