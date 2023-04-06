@@ -27,6 +27,7 @@
 		4982B6C829CA3665008D2CCD /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4982B6C529CA3665008D2CCD /* Settings.swift */; };
 		4982B6C929CA3665008D2CCD /* MarkdownHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4982B6C629CA3665008D2CCD /* MarkdownHelpers.swift */; };
 		4982B6CA29CA3665008D2CCD /* MarkdownHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4982B6C629CA3665008D2CCD /* MarkdownHelpers.swift */; };
+		D46A243C29CF6BCA0034AAE2 /* PlaticaBotDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46A243B29CF6BCA0034AAE2 /* PlaticaBotDocument.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,8 @@
 		4982B6C529CA3665008D2CCD /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		4982B6C629CA3665008D2CCD /* MarkdownHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownHelpers.swift; sourceTree = "<group>"; };
 		4982B6CD29CA3C3C008D2CCD /* PlaticaWatch Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PlaticaWatch Watch App.entitlements"; sourceTree = "<group>"; };
+		D46A243B29CF6BCA0034AAE2 /* PlaticaBotDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaticaBotDocument.swift; sourceTree = "<group>"; };
+		D46A243D29D0E65C0034AAE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +96,7 @@
 		4982B68D29CA333C008D2CCD /* PlaticaBot */ = {
 			isa = PBXGroup;
 			children = (
+				D46A243D29D0E65C0034AAE2 /* Info.plist */,
 				4982B6C629CA3665008D2CCD /* MarkdownHelpers.swift */,
 				4982B6C529CA3665008D2CCD /* Settings.swift */,
 				4982B68E29CA333C008D2CCD /* PlaticaBotApp.swift */,
@@ -101,6 +105,7 @@
 				4982B69229CA333E008D2CCD /* Assets.xcassets */,
 				4982B69429CA333E008D2CCD /* PlaticaBot.entitlements */,
 				4982B69529CA333E008D2CCD /* Preview Content */,
+				D46A243B29CF6BCA0034AAE2 /* PlaticaBotDocument.swift */,
 			);
 			path = PlaticaBot;
 			sourceTree = "<group>";
@@ -261,6 +266,7 @@
 				4982B6C729CA3665008D2CCD /* Settings.swift in Sources */,
 				4982B6C929CA3665008D2CCD /* MarkdownHelpers.swift in Sources */,
 				4982B68F29CA333C008D2CCD /* PlaticaBotApp.swift in Sources */,
+				D46A243C29CF6BCA0034AAE2 /* PlaticaBotDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,10 +407,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PlaticaBot/Preview Content\"";
-				DEVELOPMENT_TEAM = PJQC57N853;
+				DEVELOPMENT_TEAM = Q62966AJ3S;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PlaticaBot/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -420,7 +427,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = org.tirania.PlaticaBot;
+				PRODUCT_BUNDLE_IDENTIFIER = com.touchcentric.PlaticaBot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -439,10 +446,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PlaticaBot/Preview Content\"";
-				DEVELOPMENT_TEAM = PJQC57N853;
+				DEVELOPMENT_TEAM = Q62966AJ3S;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PlaticaBot/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -458,7 +466,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = org.tirania.PlaticaBot;
+				PRODUCT_BUNDLE_IDENTIFIER = com.touchcentric.PlaticaBot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
